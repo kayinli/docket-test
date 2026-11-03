@@ -1,0 +1,24 @@
+version: 1
+on_error: failure
+warn_check: success
+slo_required: false
+govern:
+  mode: all_non_draft
+rules:
+  - id: protect-workflows
+    type: path_match
+    severity: must
+    mode: warn
+    paths: [".github/workflows/**"]
+  - id: rollback-section
+    type: pr_section
+    severity: must
+    mode: warn
+    section: "回滚预案"
+    require_fields: []
+  - id: drop-healthcheck
+    type: diff_signal
+    severity: must
+    mode: warn
+    pattern: delete_line
+    line_regex: "health|ready"
