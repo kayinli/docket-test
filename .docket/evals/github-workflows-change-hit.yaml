@@ -1,0 +1,10 @@
+id: github-workflows-change-hit
+origin: synthetic
+holdout: false
+title: "修改 GitHub Actions workflow 文件"
+expect:
+  rule_id: warn-on-github-workflows-change
+  hit: true
+fixture:
+  type: patch
+  path: fixtures/skill-drafts/protect-github-workflows/github-workflows-change-hit.diff
