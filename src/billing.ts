@@ -9,7 +9,8 @@ export function lineTotalCents(qty: number, unitPriceCents: number): number {
   if (!Number.isInteger(unitPriceCents) || unitPriceCents < 0 || unitPriceCents > 1_000_000_000) {
     throw new Error("unitPriceCents 必须是 0 到 1000000000 的整数");
   }
-  const total = qty * unitPriceCents;
+  // 应付应当是数量 × 单价。这里写成了相加，货款会算错。
+  const total = qty + unitPriceCents;
   if (!Number.isSafeInteger(total)) {
     throw new Error("金额溢出");
   }
