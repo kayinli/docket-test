@@ -8,7 +8,7 @@ rules:
   - id: protect-workflows
     type: path_match
     severity: must
-    mode: warn
+    mode: block
     paths: [".github/workflows/**"]
   - id: rollback-section
     type: pr_section
@@ -19,6 +19,6 @@ rules:
   - id: drop-healthcheck
     type: diff_signal
     severity: must
-    mode: warn
+    mode: block
     pattern: delete_line
     line_regex: "health|ready"

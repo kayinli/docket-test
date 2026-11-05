@@ -4,7 +4,7 @@
 
 ## 硬门禁和软分析
 
-硬门禁只看 `.docket/policy.yaml` 里的规则，加上 `.docket/evals/`。本仓库当前三条规则的 id 不变，模式都是 `warn`：
+硬门禁只看 `.docket/policy.yaml` 里的规则，加上 `.docket/evals/`。本仓库当前三条规则的 id 不变。`protect-workflows` 与第三条 diff_signal 规则的 mode 是 `block`（命中后 Check `docket/gate` 失败），`rollback-section` 仍是 `warn`：
 
 | id | 类型 | 会在什么时候出警告 |
 | --- | --- | --- |
