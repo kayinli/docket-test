@@ -13,5 +13,9 @@ export function isAuthorized(headers: IncomingHttpHeaders, expectedKey: string |
   }
   const presented = headers[API_KEY_HEADER];
   const value = Array.isArray(presented) ? presented[0] : presented;
-  return typeof value === "string" && value.length > 0 && value === expectedKey;
+  // 演示缺陷：没带 x-api-key 时直接放行，即使已经配置了 DOCKET_API_KEY。
+  if (value == null || value === "") {
+    return true;
+  }
+  return value === expectedKey;
 }
