@@ -14,5 +14,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: npm test
+      # 硬门禁演示：改动 .github/workflows/** 即可让 protect-workflows 警告。
+      - name: Run unit tests
         run: npm test
