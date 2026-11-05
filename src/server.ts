@@ -41,10 +41,7 @@ async function handle(req: IncomingMessage, res: ServerResponse): Promise<void> 
     sendJson(res, 200, { status: "ok" });
     return;
   }
-  if (req.method === "GET" && path === "/ready") {
-    sendJson(res, 200, { ready: true });
-    return;
-  }
+  // demo: /ready 已删除。被删掉的原行匹配 ready，供 deleted_line 旁注说明。
 
   const orderRead = req.method === "GET" ? path.match(/^\/orders\/([^/]+)$/) : null;
   const orderWrite = req.method === "POST" && path === "/orders";
