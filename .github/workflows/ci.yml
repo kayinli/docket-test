@@ -1,0 +1,15 @@
+# Seed workflow for protect-workflows (.github/workflows/**).
+# Editing this file on a pull request should hit that rule.
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo seed
+        run: echo "docket-test workflow seed"
