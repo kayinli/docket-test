@@ -12,4 +12,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Echo seed
-        run: echo "docket-test workflow seed"
+        # smoke: hit protect-workflows
+        run: echo "docket-test workflow seed (all three)"
