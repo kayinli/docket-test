@@ -1,0 +1,10 @@
+id: protect-spec-miss
+origin: synthetic
+holdout: false
+title: "只改源码，未触及 spec"
+expect:
+  rule_id: protect-spec
+  hit: false
+fixture:
+  type: patch
+  path: fixtures/skill-drafts/protect-spec/protect-spec-miss.diff

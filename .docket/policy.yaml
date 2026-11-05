@@ -1,3 +1,5 @@
+# 起草来源：skill protect-spec，revision 1
+# 草稿。合入前必须是普通策略 PR。docket/gate 不读 skill 包。
 version: 1
 on_error: failure
 warn_check: success
@@ -5,20 +7,9 @@ slo_required: false
 govern:
   mode: all_non_draft
 rules:
-  - id: protect-workflows
+  - id: protect-spec
     type: path_match
     severity: must
     mode: warn
-    paths: [".github/workflows/**"]
-  - id: rollback-section
-    type: pr_section
-    severity: must
-    mode: warn
-    section: "回滚预案"
-    require_fields: []
-  - id: drop-healthcheck
-    type: diff_signal
-    severity: must
-    mode: warn
-    pattern: delete_line
-    line_regex: "health|ready"
+    paths:
+      - "spec/**"

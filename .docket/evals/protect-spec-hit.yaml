@@ -1,0 +1,10 @@
+id: protect-spec-hit
+origin: synthetic
+holdout: false
+title: "改了 spec 下的文件"
+expect:
+  rule_id: protect-spec
+  hit: true
+fixture:
+  type: patch
+  path: fixtures/skill-drafts/protect-spec/protect-spec-hit.diff
