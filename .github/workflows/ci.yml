@@ -1,5 +1,4 @@
-# Seed workflow for protect-workflows (.github/workflows/**).
-# Editing this file on a pull request should hit that rule.
+# protect-workflows 盯着 .github/workflows/**。改这个文件的 PR 会命中该规则（mode: warn）。
 name: ci
 
 on:
@@ -8,8 +7,12 @@ on:
     branches: [main]
 
 jobs:
-  probe:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - name: Echo seed
-        run: echo "docket-test workflow seed"
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: npm test
+        run: npm test
