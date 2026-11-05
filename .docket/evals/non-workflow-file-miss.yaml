@@ -1,0 +1,10 @@
+id: non-workflow-file-miss
+origin: synthetic
+holdout: false
+title: "修改非 workflow 文件"
+expect:
+  rule_id: warn-on-github-workflows-change
+  hit: false
+fixture:
+  type: patch
+  path: fixtures/skill-drafts/protect-github-workflows/non-workflow-file-miss.diff
