@@ -43,3 +43,5 @@ curl -s localhost:3000/orders/1
 - `src/probe.ts` 里保留匹配 `health|ready` 的导出行。删掉或注释掉它，`drop-healthcheck` 会警告。活的探针是 `GET /health` 和 `GET /ready`。
 - `.github/workflows/ci.yml` 在 pull request 上跑 `npm test`。改这个文件会让 `protect-workflows` 警告。
 - 希望 `rollback-section` 不响时，PR 正文要有「回滚预案」一节。
+
+进程内订单在重启后清空。这只是演示服务，不是生产账本。
