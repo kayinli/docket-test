@@ -4,12 +4,12 @@
 
 ## 硬门禁和软分析
 
-硬门禁只看 `.docket/policy.yaml` 里的规则，加上 `.docket/evals/`。本仓库当前三条规则的 id 不变，模式都是 `warn`：
+硬门禁只看 `.docket/policy.yaml` 里的规则，加上 `.docket/evals/`。本仓库当前三条规则的 id 不变。`protect-workflows` 与 `drop-healthcheck` 的 mode 是 `block`（命中后 Check `docket/gate` 失败），`rollback-section` 仍是 `warn`：
 
-| id | 类型 | 会在什么时候出警告 |
+| id | 类型 | 会在什么时候命中 |
 | --- | --- | --- |
-| `protect-workflows` | `path_match` | PR 改了 `.github/workflows/**` |
-| `rollback-section` | `pr_section` | PR 正文没有「回滚预案」这一节 |
+| `protect-workflows` | `path_match` | PR 改了 `.github/workflows/**`（mode: block） |
+| `rollback-section` | `pr_section` | PR 正文没有「回滚预案」这一节（mode: warn） |
 | `drop-healthcheck` | `diff_signal` | diff 删掉了匹配 `health\|ready` 的行 |
 
 `warn_check: success` 表示命中之后 Check `docket/gate` 仍然成功，只是带警告。软分析不是第五类规则，也不会写入 `hits[]`，更不会改 policy 或 gate。它是旁注：`POST /console/analyze` 拿本 PR 的 diff 和规则列表，把发现归到例如 `protected_path`、`deleted_line`、`missing_section`、`known_pattern`、`already_covered`、`not_expressible`。
@@ -41,5 +41,5 @@ curl -s localhost:3000/orders/1
 ## 规则种子刻意留着
 
 - `src/probe.ts` 里保留匹配 `health|ready` 的导出行。删掉或注释掉它，`drop-healthcheck` 会警告。活的探针是 `GET /health` 和 `GET /ready`。
-- `.github/workflows/ci.yml` 在 pull request 上跑 `npm test`。改这个文件会让 `protect-workflows` 警告。
+- `.github/workflows/ci.yml` 在 pull request 上跑 `npm test`。改这个文件会让 `protect-workflows` 阻断（mode: block）。
 - 希望 `rollback-section` 不响时，PR 正文要有「回滚预案」一节。
