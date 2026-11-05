@@ -1,4 +1,5 @@
-# protect-workflows 盯着 .github/workflows/**。改这个文件的 PR 会命中该规则（mode: warn）。
+# protect-workflows 盯着 .github/workflows/**。改这个文件的 PR 会命中该规则（mode: block）。
+# 演示：故意改 workflow，让 block 模式下的 docket/gate 失败。
 name: ci
 
 on:
