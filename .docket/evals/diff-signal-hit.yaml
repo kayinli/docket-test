@@ -1,0 +1,10 @@
+id: diff-signal-hit
+origin: synthetic
+holdout: false
+title: "删除匹配行"
+expect:
+  rule_id: drop-healthcheck
+  hit: true
+fixture:
+  type: patch
+  path: fixtures/policy-block/diff-signal-hit.diff
