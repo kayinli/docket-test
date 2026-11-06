@@ -1,0 +1,10 @@
+id: protect-spec-directory-hit
+origin: synthetic
+holdout: false
+title: "改了 spec 目录下的接口定义"
+expect:
+  rule_id: protect-spec-directory
+  hit: true
+fixture:
+  type: patch
+  path: fixtures/skill-drafts/protect-spec-directory/protect-spec-directory-hit.diff
