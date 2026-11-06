@@ -1,0 +1,10 @@
+id: protect-spec-directory-miss
+origin: synthetic
+holdout: false
+title: "只改实现代码，没碰 spec"
+expect:
+  rule_id: protect-spec-directory
+  hit: false
+fixture:
+  type: patch
+  path: fixtures/skill-drafts/protect-spec-directory/protect-spec-directory-miss.diff

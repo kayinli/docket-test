@@ -1,0 +1,6 @@
+diff --git a/spec/api.md b/spec/api.md
+--- a/spec/api.md
++++ b/spec/api.md
+@@ -1 +1 @@
+-GET /v1/items
++GET /v1/items/{id}
