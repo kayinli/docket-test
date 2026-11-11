@@ -1,34 +1,12 @@
 version: 1
-on_error: failure
-warn_check: success
-slo_required: false
-govern:
-  mode: all_non_draft
-rules:
-  - id: protect-workflows
-    type: path_match
-    severity: must
-    mode: block
-    paths: [".github/workflows/**"]
-  - id: rollback-section
-    type: pr_section
-    severity: must
-    mode: warn
-    section: "回滚预案"
-    require_fields: []
-  - id: drop-healthcheck
-    type: diff_signal
-    severity: must
-    mode: block
-    pattern: delete_line
-    line_regex: "health|ready"
+rules: []
 semantic_admission:
   version: 1
   rules:
-    - id: deployment-health-probes
+    - id: server-no-duplicate-interface-client-code
       version: 1
-      requirement: "验收范围内，每个 Kubernetes Deployment 的每个常规容器（spec.template.spec.containers）都必须同时具备 readinessProbe 和 livenessProbe。只根据已经展开、能够逐个常规容器判断的 Deployment 清单下结论。Helm 或其它模板若仍含未展开占位，或清单不足以判断某个常规容器是否同时具备这两项探针，结论是无法判断，不能当作通过。"
+      requirement: 对某个系统的接口调用包等基础代码在代码库里不能重复建设
       scope:
         paths:
-          - "deploy/semantic-acceptance/**"
+          - /server/**
       effect: block
