@@ -1,3 +1,4 @@
+# rerun-marker: pr23-ci-snapshot
 # rerun-marker: pr23-semantic-admit-2
 apiVersion: apps/v1
 kind: Deployment
