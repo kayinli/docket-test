@@ -1,3 +1,4 @@
+# rerun-marker: pr24-semantic-admit-2
 apiVersion: apps/v1
 kind: Deployment
 metadata:
