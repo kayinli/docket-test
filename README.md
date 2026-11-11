@@ -43,3 +43,11 @@ curl -s localhost:3000/orders/1
 - `src/probe.ts` 里保留匹配 `health|ready` 的导出行。删掉或注释掉它，`drop-healthcheck` 会警告。活的探针是 `GET /health` 和 `GET /ready`。
 - `.github/workflows/ci.yml` 在 pull request 上跑 `npm test`。改这个文件会让 `protect-workflows` 警告。
 - 希望 `rollback-section` 不响时，PR 正文要有「回滚预案」一节。
+
+## 自然语言语义准入
+
+上面三条规则的 id、类型和 mode 不变，`govern.mode` 仍是 `all_non_draft`。策略另有并列块 `semantic_admission`，不嵌在 `govern` 或 `rules` 里。规则 id 是 `deployment-health-probes`，`effect` 是 `block`，范围只有 `deploy/semantic-acceptance/**`。
+
+非草稿 PR 都会跑这条规则，不是只有 diff 改到范围才跑。范围内零文件时覆盖是 gap，不能当成不适用。`deploy/semantic-acceptance/deployment.yaml` 是范围内的合格基线：一个常规容器，同时有 readinessProbe 和 livenessProbe，没有 initContainers。
+
+未展开、因而判断不了的清单不能当作通过。init 例外不在这次验收里，先不声称可用。后续三种真实用例都是改这一份基线，说明在 `fixtures/semantic-admission/README.md`。真实模型还没有跑过。单独的语义准入同意缺失时，不能把待人工写成通过。

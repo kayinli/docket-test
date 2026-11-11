@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: semantic-acceptance
+  labels:
+    app: semantic-acceptance
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: semantic-acceptance
+  template:
+    metadata:
+      labels:
+        app: semantic-acceptance
+    spec:
+      containers:
+        - name: app
+          image: example.invalid/app:1
+          ports:
+            - name: http
+              containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: http
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
