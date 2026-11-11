@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: semantic-acceptance-pass
+  labels:
+    app: semantic-acceptance-pass
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: semantic-acceptance-pass
+  template:
+    metadata:
+      labels:
+        app: semantic-acceptance-pass
+    spec:
+      initContainers:
+        - name: migrate
+          image: example.invalid/migrate:1
+          command: ["migrate"]
+      containers:
+        - name: app
+          image: example.invalid/app:1
+          ports:
+            - name: http
+              containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: http
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http

@@ -22,3 +22,13 @@ rules:
     mode: block
     pattern: delete_line
     line_regex: "health|ready"
+semantic_admission:
+  version: 1
+  rules:
+    - id: deployment-health-probes
+      version: 1
+      requirement: "验收范围内，每个 Kubernetes Deployment 的每个常规容器（spec.template.spec.containers）都必须同时具备 readinessProbe 和 livenessProbe。initContainers 除外，不要求探针。只根据已经展开、能够逐个常规容器判断的 Deployment 清单下结论。Helm 或其它模板若仍含未展开占位，或清单不足以判断某个常规容器是否同时具备这两项探针，结论是无法判断，不能当作通过。"
+      scope:
+        paths:
+          - "deploy/semantic-acceptance/**"
+      effect: block

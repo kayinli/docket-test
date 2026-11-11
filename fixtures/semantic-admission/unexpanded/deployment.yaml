@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "semantic-acceptance.fullname" . }}
+  labels:
+    app: {{ include "semantic-acceptance.name" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "semantic-acceptance.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "semantic-acceptance.name" . }}
+    spec:
+      initContainers:
+        - name: migrate
+          image: "{{ .Values.migrate.image }}"
+          command: ["migrate"]
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+          {{- if .Values.probes.enabled }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.probes.readinessPath }}
+              port: http
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.probes.livenessPath }}
+              port: http
+          {{- end }}

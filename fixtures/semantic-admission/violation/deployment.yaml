@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: semantic-acceptance-violation
+  labels:
+    app: semantic-acceptance-violation
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: semantic-acceptance-violation
+  template:
+    metadata:
+      labels:
+        app: semantic-acceptance-violation
+    spec:
+      initContainers:
+        - name: migrate
+          image: example.invalid/migrate:1
+          command: ["migrate"]
+      containers:
+        - name: app
+          image: example.invalid/app:1
+          ports:
+            - name: http
+              containerPort: 8080
