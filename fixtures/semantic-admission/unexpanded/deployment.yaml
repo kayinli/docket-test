@@ -14,10 +14,6 @@ spec:
       labels:
         app: {{ include "semantic-acceptance.name" . }}
     spec:
-      initContainers:
-        - name: migrate
-          image: "{{ .Values.migrate.image }}"
-          command: ["migrate"]
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"

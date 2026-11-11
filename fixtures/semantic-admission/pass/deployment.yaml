@@ -1,23 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: semantic-acceptance-pass
+  name: semantic-acceptance
   labels:
-    app: semantic-acceptance-pass
+    app: semantic-acceptance
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
-      app: semantic-acceptance-pass
+      app: semantic-acceptance
   template:
     metadata:
       labels:
-        app: semantic-acceptance-pass
+        app: semantic-acceptance
     spec:
-      initContainers:
-        - name: migrate
-          image: example.invalid/migrate:1
-          command: ["migrate"]
       containers:
         - name: app
           image: example.invalid/app:1
